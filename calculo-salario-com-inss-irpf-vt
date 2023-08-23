@@ -1,0 +1,53 @@
+bruto = float (input(f"Digite seu salário (BRUTO): R$"))
+dependentes = int (input(f"Número de dependentes: "))
+vt = input (f"Possui VT? (s ou n): ")
+
+#CALCULO INSS
+if bruto <= 1320:
+    inss = bruto * 0.075
+    
+elif bruto >= 1320.01 and bruto <= 2571.29:
+    inss = (bruto - 1320) * 0.09 + 99
+
+elif bruto >= 2571.30 and bruto <= 3856.94:
+    inss = (bruto - 2571.29) * 0.12 + 112.62 + 99
+
+elif bruto >= 3856.95 and bruto <= 7507.49:
+    inss = (bruto - 3856.94) * 0.14 + 99 + 112.62 + 154.28
+    
+elif bruto >= 7507.50:
+    inss = (7507.49 - 3856.95) * 0.14 + 99 + 112.62 + 154.28
+
+#CALCULO IMPOSTO DE RENDA
+
+if bruto <= 2112:
+    irpf = 0 + (dependentes * 189.50)
+    
+elif bruto >= 2112.01 and bruto <= 2826.65:
+    irpf = (bruto * 0.075) - 158.40 + (dependentes * 189.50)
+    
+elif bruto >= 2826.66 and bruto <= 3751.05:
+    irpf = (bruto * 0.15) - 370.40 + (dependentes * 189.50)
+    
+elif bruto >= 3751.06 and bruto <= 4664.68:
+    irpf = (bruto * 0.225) - 651.73 + (dependentes * 189.50)
+    
+elif bruto > 4664.68:
+    irpf = (bruto * 0.275) - 884.96 + (dependentes * 189.50)
+
+#CALCULO VT
+if vt == "n":
+    vt = 0
+    
+elif vt == "s":
+    vt = bruto * 0.06
+
+#CALCULO SALÁRIO LIQUIDO
+liquido = bruto - inss - irpf - vt
+
+#ÁREA DE IMPRESSÃO
+print (f"Salário Bruto: R${bruto}")
+print (f"INSS: R${inss}")
+print (f"Imposto de Renda (IR): {irpf}")
+print (f"Valor Desconto VT: {vt}")
+print (f"Salário Líquido: R${liquido}")
